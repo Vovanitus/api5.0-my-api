@@ -3,6 +3,7 @@ import Food from './food.model';
 
 export async function createFood(req, res) {
     try {
+        // console.log(req.file); інфа про доданий файл
         const food = await Food.create(req.body);
         return res.status(HTTPStatus.CREATED).json(food);
     } catch (e) {
@@ -22,7 +23,7 @@ export async function getFoodsList(req, res) {
 export async function getFoodById(req, res) {
     try {
         const food = await Food.findById(req.params.id).populate('category');
-        return res.status(HTTPStatus.OK).json(food.toJSON());
+        return res.status(HTTPStatus.OK).json(food);
     } catch (e) {
         return res.status(HTTPStatus.BAD_REQUEST).json(e);
     }

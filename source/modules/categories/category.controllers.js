@@ -20,7 +20,7 @@ export async function getAllCategory(req, res) {
 export async function getCategoryById(req, res) {
     try {
         const category = await Category.findById(req.params.id);
-        return res.status(HTTPStatus.OK).json(category.toJSON());
+        return res.status(HTTPStatus.OK).json(category);
     } catch (e) {
         return res.status(HTTPStatus.BAD_REQUEST).json(e);
     }
