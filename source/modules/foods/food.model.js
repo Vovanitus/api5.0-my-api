@@ -1,5 +1,5 @@
 import mongoose, { Schema } from 'mongoose';
-import uniqueValidator from 'mongoose-unique-validator'
+import uniqueValidator from 'mongoose-unique-validator';
 
 const FoodSchema = new Schema({
     name: {
@@ -12,6 +12,9 @@ const FoodSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'Category',
     },
+    foodImage: {
+        type: String,
+    },
 });
 
 FoodSchema.plugin(uniqueValidator, {
@@ -22,6 +25,7 @@ FoodSchema.methods = {
         return {
             name: this.name,
             category: this.category,
+            foodImage: this.foodImage,
         };
     },
 };

@@ -1,10 +1,18 @@
 import HTTPStatus from 'http-status';
+import mongoose from 'mongoose';
 import Food from './food.model';
 
 export async function createFood(req, res) {
     try {
         // console.log(req.file); інфа про доданий файл
-        const food = await Food.create(req.body);
+        const foodBody = new Food ({
+            _id: new mongoose.Types.ObjectId(),
+            name: req.body.name,
+            category: req.body.category,
+            foodImage: req.file.path,
+        });
+        foodBody.foodImage = 'http://localhost:3000/' + foodBody.foodImage;
+        const food = await Food.create(foodBody);
         return res.status(HTTPStatus.CREATED).json(food);
     } catch (e) {
         return res.status(HTTPStatus.BAD_REQUEST).json(e);
